@@ -87,7 +87,7 @@ public abstract class Buffer {
      * This is set in the constructor.
      * TODO: make this final at the cost of loads of extra constructors? [how many?]
      */
-    int effectiveDirectAddress;
+    long effectiveDirectAddress;
 
     /**
      * For direct buffers, the underlying MemoryBlock; null otherwise.
@@ -300,14 +300,6 @@ public abstract class Buffer {
      *                if <code>newLimit</code> is invalid.
      */
     public final Buffer limit(int newLimit) {
-        limitImpl(newLimit);
-        return this;
-    }
-
-    /**
-     * Subverts the fact that limit(int) is final, for the benefit of MappedByteBufferAdapter.
-     */
-    void limitImpl(int newLimit) {
         if (newLimit < 0 || newLimit > capacity) {
             throw new IllegalArgumentException("Bad limit (capacity " + capacity + "): " + newLimit);
         }
@@ -319,6 +311,7 @@ public abstract class Buffer {
         if ((mark != UNSET_MARK) && (mark > newLimit)) {
             mark = UNSET_MARK;
         }
+        return this;
     }
 
     /**
