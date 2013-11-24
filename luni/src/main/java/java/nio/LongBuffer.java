@@ -92,7 +92,7 @@ public abstract class LongBuffer extends Buffer implements
     }
 
     LongBuffer(int capacity) {
-        super(3, capacity);
+        super(3, capacity, null);
     }
 
     public final long[] array() {

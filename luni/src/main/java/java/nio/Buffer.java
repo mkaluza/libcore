@@ -89,12 +89,18 @@ public abstract class Buffer {
      */
     long effectiveDirectAddress;
 
-    Buffer(int elementSizeShift, int capacity) {
+    /**
+     * For direct buffers, the underlying MemoryBlock; null otherwise.
+     */
+    final MemoryBlock block;
+
+    Buffer(int elementSizeShift, int capacity, MemoryBlock block) {
         this._elementSizeShift = elementSizeShift;
         if (capacity < 0) {
             throw new IllegalArgumentException("capacity < 0: " + capacity);
         }
         this.capacity = this.limit = capacity;
+        this.block = block;
     }
 
     /**

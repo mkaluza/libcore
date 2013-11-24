@@ -94,7 +94,7 @@ public abstract class FloatBuffer extends Buffer implements
     }
 
     FloatBuffer(int capacity) {
-        super(2, capacity);
+        super(2, capacity, null);
     }
 
     public final float[] array() {

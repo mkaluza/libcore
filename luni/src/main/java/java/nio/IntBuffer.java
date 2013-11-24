@@ -90,7 +90,7 @@ public abstract class IntBuffer extends Buffer implements Comparable<IntBuffer> 
     }
 
     IntBuffer(int capacity) {
-        super(2, capacity);
+        super(2, capacity, null);
     }
 
     public final int[] array() {
