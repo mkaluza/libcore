@@ -19,8 +19,8 @@ package java.nio;
 import java.nio.channels.FileChannel.MapMode;
 import libcore.io.ErrnoException;
 import libcore.io.Libcore;
-import static libcore.io.OsConstants.MS_SYNC;
-import static libcore.io.OsConstants._SC_PAGE_SIZE;
+import libcore.io.Memory;
+import static libcore.io.OsConstants.*;
 
 /**
  * {@code MappedByteBuffer} is a special kind of direct byte buffer which maps a
@@ -38,12 +38,10 @@ import static libcore.io.OsConstants._SC_PAGE_SIZE;
  */
 public abstract class MappedByteBuffer extends ByteBuffer {
   final MapMode mapMode;
-  final MemoryBlock block;
 
   MappedByteBuffer(MemoryBlock block, int capacity, MapMode mapMode) {
-    super(capacity);
+    super(capacity, block);
     this.mapMode = mapMode;
-    this.block = block;
   }
 
   /**
